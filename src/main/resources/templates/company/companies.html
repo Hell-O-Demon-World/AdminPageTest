@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<style>
+    .tableContent, .table {
+        text-align: center
+    }
+</style>
+<body>
+
+<div class="container" style="max-width: 950px">
+    <div class="py-5 text-center">
+        <h2>업체 목록</h2>
+    </div>
+
+    <form th:object="${companySearch}" method="get" class="form-inline">
+        <div class="row">
+            <div class="col">
+                <input type="text" th:field="*{companyName}" class="form-control" placeholder="업체명"/>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-secondary mb-2">검색</button>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+                <div class="col">
+                    <button class="btn btn-primary float-end"
+                            onclick="location.href='addCompanyForm.html'"
+                            th:onclick="|location.href='@{/companies/add}'|"
+                            type="button">업체 등록
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>업체명</th>
+                <th>업체 전화번호</th>
+                <th>대표자 성명</th>
+                <th>삭제 버튼</th>
+            </tr>
+            </thead>
+            <tbody class="tableContent">
+            <tr th:each="company : ${companies}">
+                <td><a href="company.html" th:href="@{/companies/{Id}(Id=${company.id})}" th:text="${company.id}">업체아이디</a></td>
+                <td><a href="company.html" th:href="@{/companies/{Id}(Id=${company.id})}" th:text="${company.companyName}"></a></td>
+                <td th:text="${company.companyTel}"></td>
+                <td th:text="${company.companyRepName}"></td>
+                <td>
+                    <button class="btn btn-primary float-center"
+                            onclick="location.href='companies.html'"
+                            th:onclick="|location.href='@{/companies/delete/{id}(id=${company.id})}'|"
+                            type="button">업체 삭제
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div> <!-- /container -->
+
+</body>
+</html>

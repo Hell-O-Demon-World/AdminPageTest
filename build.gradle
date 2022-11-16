@@ -1,0 +1,43 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.5'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'java'
+}
+
+group = 'com.golfzonaca'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+//ext["hibernate.version"] = "5.6.5.Final"
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+//	//MyBatis 추가
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+//	//JPA, Spring Data JPA 추가
+//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    //MariaDB 추가
+    implementation 'org.mariadb.jdbc:mariadb-java-client'
+    //Spring Security 추가
+    implementation 'org.springframework.boot:spring-boot-starter-security:2.7.4'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
