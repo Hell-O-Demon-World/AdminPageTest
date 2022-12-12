@@ -1,8 +1,8 @@
 package com.golfzonaca.adminpage.web;
 
 import com.golfzonaca.adminpage.domain.Company;
-import com.golfzonaca.adminpage.repository.CompanySearchCond;
-import com.golfzonaca.adminpage.service.CompanyService;
+import com.golfzonaca.adminpage.repository.company.CompanySearchCond;
+import com.golfzonaca.adminpage.service.company.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,7 @@ public class MainController {
 
     @GetMapping("/")
     public String mainPage(@ModelAttribute("companySearch") CompanySearchCond companySearch, Model model) {
-        List<Company> companies = companyService.findCompanies(companySearch);
+        List<Company> companies = companyService.findCompanies(companySearch.getCompanyName());
         model.addAttribute("companies", companies);
         return "company/companies";
     }

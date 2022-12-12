@@ -1,4 +1,4 @@
-package com.golfzonaca.adminpage.repository;
+package com.golfzonaca.adminpage.repository.company;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
