@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="py-5 text-center">
+        <h2>QnA 상세 보기</h2>
+    </div>
+    <form th:action="@{/qna/{inquiryId}/answer(inquiryId=${inquiryDetails.inquiryId})}" method="post">
+        <div>
+            <input type="hidden" id="id" name="id" class="form-control" value="1" th:value="${inquiryDetails.inquiryId}"
+                   th:hidden="true">
+        </div>
+        <div>
+            <label for="title">제목</label>
+            <input type="text" id="title" name="title" class="form-control" value="1"
+                   th:value="${inquiryDetails.inquiryTitle}"
+                   readonly
+                   disabled="true">
+        </div>
+        <div>
+            <label for="inquiryContext">내용</label>
+            <input type="text" id="inquiryContext" name="inquiryContext" class="form-control"
+                   th:value="${inquiryDetails.inquiryContext}" readonly disabled="true">
+        </div>
+        <div>
+            <label for="inquiryStatus">답변 상태</label>
+            <input type="text" id="inquiryStatus" name=inquiryStatus class="form-control" value="1"
+                   th:value="${inquiryDetails.inquiryStatus}" readonly disabled="true">
+        </div>
+        <div>
+            <label for="writtenDateTime">작성 시간</label>
+            <input type="text" id="writtenDateTime" name=writtenDateTime class="form-control" value="1"
+                   th:value="${inquiryDetails.writtenDateTime}" readonly disabled="true">
+        </div>
+        <div th:if="${inquiryDetails.inquiryStatus}">
+            <label for="existAnswer">답변</label>
+            <input type="text" id="existAnswer" name=answer class="form-control" value="1"
+                   th:value="${inquiryDetails.answer}" th:readonly="${inquiryDetails.inquiryStatus}"
+                   th:disabled="${inquiryDetails.inquiryStatus}">
+        </div>
+        <div th:if="${!inquiryDetails.inquiryStatus}">
+            <label for="insertAnswer">답변 추가</label>
+            <input type="text" id="insertAnswer" name=answer class="form-control" value="1"
+                   th:field="${answer.answer}" th:minlength="1" , th:maxlength="200" required>
+        </div>
+
+
+        <!-- multi checkbox -->
+        <hr class="my-4">
+        <div class="row">
+            <div class="col" th:if="${!inquiryDetails.inquiryStatus}">
+                <button class="w-100 btn btn-primary btn-lg" type="submit">답변 등록</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg"
+                        th:onclick="|location.href='@{/qna}'|"
+                        type="button">목록으로
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div> <!-- /container -->
+</body>
+</html>

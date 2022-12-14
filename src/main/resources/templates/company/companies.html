@@ -18,6 +18,11 @@
     </div>
 
     <form th:object="${companySearch}" method="get" class="form-inline">
+        <div class="col">
+            <button class="btn btn-primary float-center" style="margin-bottom: 1%"
+                    th:onclick="|location.href='@{/}'|" type="button">메인으로
+            </button>
+        </div>
         <div class="row">
             <div class="col">
                 <input type="text" th:field="*{companyName}" class="form-control" placeholder="업체명"/>
@@ -54,10 +59,12 @@
             </thead>
             <tbody class="tableContent">
             <tr th:each="company : ${companies}">
-                <td><a href="company.html" th:href="@{/companies/{Id}(Id=${company.id})}" th:text="${company.id}">업체아이디</a></td>
-                <td><a href="company.html" th:href="@{/companies/{Id}(Id=${company.id})}" th:text="${company.companyName}"></a></td>
-                <td th:text="${company.companyTel}"></td>
-                <td th:text="${company.companyRepName}"></td>
+                <td><a href="company.html" th:href="@{/companies/{Id}(Id=${company.id})}"
+                       th:text="${company.id}">업체아이디</a></td>
+                <td><a href="company.html" th:href="@{/companies/{Id}(Id=${company.id})}"
+                       th:text="${company.name}"></a></td>
+                <td th:text="${company.tel}"></td>
+                <td th:text="${company.repName}"></td>
                 <td>
                     <button class="btn btn-primary float-center"
                             onclick="location.href='companies.html'"

@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static com.golfzonaca.adminpage.domain.QCompany.*;
+import static com.golfzonaca.adminpage.domain.QCompany.company;
 
 @Transactional
 @Repository
@@ -33,7 +33,7 @@ public class QueryCompanyRepository {
 
         if (StringUtils.hasText(keyWord)) {
 
-            return company.companyName.contains(keyWord);
+            return company.Name.contains(keyWord);
         }
         return null;
     }

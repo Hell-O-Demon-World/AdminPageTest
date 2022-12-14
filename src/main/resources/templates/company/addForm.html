@@ -54,13 +54,13 @@
         </div>
         <div>
             <label for="postalCode" th:text="#{label.company.postalCode}">우편번호</label>
-            <input type="text" id="postalCode" th:field="${company.address.postalCode}" name="postalCode"
+            <input type="text" id="postalCode" th:field="${company.postalCode}" name="postalCode"
                    pattern="[0-9]{5}"
                    class="form-control" placeholder="우편번호를 입력하세요" th:minlength="5" , th:maxlength="5" required>
         </div>
         <div>
             <label for="address" th:text="#{label.company.location}">주소</label>
-            <input type="text" id="address" th:field="${company.address.address}" name="address"
+            <input type="text" id="address" th:field="${company.address}" name="address"
                    class="form-control" placeholder="주소를 입력하세요" th:minlength="1" , th:maxlength="100" required>
         </div>
 

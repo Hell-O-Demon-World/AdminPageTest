@@ -1,4 +1,4 @@
-package com.golfzonaca.adminpage.web.controller;
+package com.golfzonaca.adminpage.web.controller.company;
 
 import com.golfzonaca.adminpage.domain.Company;
 import com.golfzonaca.adminpage.repository.company.CompanySearchCond;
@@ -43,7 +43,6 @@ public class CompanyController {
 
     @PostMapping("/add")
     public String addCompany(@ModelAttribute CompanyDto companyDto, RedirectAttributes redirectAttributes) {
-
         Company savedCompany = companyService.save(companyDto);
         redirectAttributes.addAttribute("companyId", savedCompany.getId());
         redirectAttributes.addAttribute("status", true);

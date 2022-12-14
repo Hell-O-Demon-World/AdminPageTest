@@ -1,0 +1,11 @@
+package com.golfzonaca.adminpage.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "error.room")
+public class DuplicatedReservationException extends RuntimeException {
+    public DuplicatedReservationException(String msg) {
+        super(msg);
+    }
+}

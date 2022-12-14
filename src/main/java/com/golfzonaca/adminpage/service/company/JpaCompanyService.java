@@ -23,12 +23,13 @@ public class JpaCompanyService implements CompanyService {
     public Company save(CompanyDto companyDto) {
         Address address = addressRepository.save(new Address(companyDto.getAddress(), companyDto.getPostalCode()));
 
-        Company company = new Company(address, companyDto.getCompanyLoginId(),
+        Company company = new Company(companyDto.getCompanyLoginId(),
                 companyDto.getCompanyPw(),
                 companyDto.getCompanyName(),
                 companyDto.getCompanyTel(),
                 companyDto.getCompanyRegNum(),
-                companyDto.getCompanyRepName());
+                companyDto.getCompanyRepName(),
+                address);
 
         return companyRepository.save(company);
     }
