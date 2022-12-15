@@ -16,7 +16,7 @@ public class CustomInquiryRepository implements InquiryRepository {
 
     @Override
     public List<Inquiry> findAll() {
-        return jpaRepository.findAll();
+        return jpaRepository.findAllByOrderByIdDesc();
     }
 
     @Override

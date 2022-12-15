@@ -12,7 +12,7 @@
 </style>
 <body>
 
-<div class="container" style="max-width: 60%">
+<div class="container" style="max-width: 80%">
     <div class="py-5 text-center">
         <h2>문의 목록</h2>
     </div>
@@ -36,14 +36,13 @@
             </thead>
             <tbody class="tableContent">
             <tr th:each="inquiry : ${inquiries}">
-                <td><a th:href="@{/qna/{inquiryId}(inquiryId=${inquiry.value.inquiryId})}"
-                       th:text="${inquiry.key}">번호</a></td>
-                <td><a th:href="@{/qna/{inquiryId}(inquiryId=${inquiry.value.inquiryId})}"
-                       th:text="${inquiry.value.inquiryTitle}">제목</a></td>
-                <td><a th:href="@{/qna/{inquiryId}(inquiryId=${inquiry.value.inquiryId})}"
-                       th:text="${inquiry.value.inquiryContext}">내용</a></td>
+                <td th:text="${inquiry.key}" style="text-decoration: none">번호</td>
+                <td th:text="${inquiry.value.inquiryTitle}" style="text-decoration: none; width: 25%" >제목</td>
+                <td style="width: 50%" ><a th:href="@{/qna/{inquiryId}(inquiryId=${inquiry.value.inquiryId})}"
+                       th:text="${inquiry.value.inquiryContext}" style="text-decoration: none">내용</a></td>
                 <td th:text="${inquiry.value.writtenDateTime}">2022-12-12 14:01:01</td>
-                <td th:text="${inquiry.value.inquiryStatus}">미완료</td>
+                <td th:if="${inquiry.value.inquiryStatus == false}" style="color: #999">진행중</td>
+                <td th:if="${inquiry.value.inquiryStatus == true}" style="color: #6a9eff">답변완료</td>
             </tr>
             </tbody>
         </table>
