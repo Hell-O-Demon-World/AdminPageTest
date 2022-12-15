@@ -29,10 +29,12 @@
                    readonly
                    disabled="true">
         </div>
-        <div>
+        <div style="height: auto">
             <label for="inquiryContext">내용</label>
-            <input type="text" id="inquiryContext" name="inquiryContext" class="form-control"
-                   th:value="${inquiryDetails.inquiryContext}" readonly disabled="true">
+            <textarea id="inquiryContext" name="inquiryContext" class="form-control"
+                      th:value="${inquiryDetails.inquiryContext}" readonly disabled="true" style="row: auto">
+                [[${inquiryDetails.inquiryContext}]]
+            </textarea>
         </div>
         <div>
             <label for="inquiryStatus">답변 상태</label>
