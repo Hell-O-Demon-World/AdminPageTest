@@ -18,7 +18,13 @@
         <h1 th:text="#{service.name}">Office Sharing Platform</h1>
         <h2 th:text="#{page.main}">관리자 페이지</h2>
     </div>
-
+    <div class="row">
+        <div class="col">
+            <form method="post" action="/signout" style="float: left!important;">
+                <input type="submit" value="로그아웃">
+            </form>
+        </div>
+    </div>
     <div class="row">
         <div class="col">
             <button class="w-100 btn btn-primary btn-lg"

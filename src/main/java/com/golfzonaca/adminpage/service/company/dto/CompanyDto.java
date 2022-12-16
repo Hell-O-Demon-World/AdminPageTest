@@ -16,4 +16,5 @@ public class CompanyDto {
     private String companyRegNum;
     private String companyRepName;
     private String postalCode;
+
 }
