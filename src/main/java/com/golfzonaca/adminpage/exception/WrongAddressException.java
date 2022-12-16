@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.NoSuchElementException;
 
-@ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "error.reservation")
-public class NonExistedReservationException extends NoSuchElementException {
-    public NonExistedReservationException(String s) {
+@ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "error.address")
+public class WrongAddressException extends NoSuchElementException {
+    public WrongAddressException(String s) {
         super(s);
     }
 }

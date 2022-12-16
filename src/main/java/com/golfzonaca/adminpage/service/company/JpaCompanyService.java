@@ -3,6 +3,7 @@ package com.golfzonaca.adminpage.service.company;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.golfzonaca.adminpage.domain.Address;
 import com.golfzonaca.adminpage.domain.Company;
+import com.golfzonaca.adminpage.exception.WrongAddressException;
 import com.golfzonaca.adminpage.repository.address.AddressRepository;
 import com.golfzonaca.adminpage.repository.company.CompanyRepository;
 import com.golfzonaca.adminpage.service.company.dto.CompanyDto;
@@ -74,6 +75,9 @@ public class JpaCompanyService implements CompanyService {
         ObjectMapper objectMapper = new ObjectMapper();
         Map map = objectMapper.convertValue(object, Map.class);
         List<Map<String, Object>> elements = (List<Map<String, Object>>) map.get("documents");
+        if (elements.isEmpty()) {
+            throw new WrongAddressException("존재하지 않는 주소입니다.");
+        }
         Map<String, Object> coordinateMap = elements.get(0);
         Map<String, String> road_address = (Map<String, String>) coordinateMap.get("road_address");
         String roadAddress = road_address.get("address_name");
