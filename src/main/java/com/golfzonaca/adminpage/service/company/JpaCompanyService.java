@@ -36,9 +36,9 @@ public class JpaCompanyService implements CompanyService {
     @Override
     public Company save(CompanyDto companyDto) {
 
-        Map<String, Double> coordinate = getCoordinate(companyDto.getAddress());
+        Map<String, String> coordinate = getCoordinate(companyDto.getAddress());
 
-        Address address = addressRepository.save(new Address(companyDto.getAddress(), companyDto.getPostalCode(), coordinate.get("lng"), coordinate.get("lat")));
+        Address address = addressRepository.save(new Address(coordinate.get("roadAddress"), coordinate.get("postalCode"), Double.valueOf(coordinate.get("longitude")), Double.valueOf(coordinate.get("latitude"))));
 
         Company company = new Company(companyDto.getCompanyLoginId(),
                 companyDto.getCompanyPw(),
@@ -51,8 +51,8 @@ public class JpaCompanyService implements CompanyService {
         return companyRepository.save(company);
     }
 
-    private Map<String, Double> getCoordinate(String address) {
-        Map<String, Double> coordinate = new LinkedHashMap<>();
+    private Map<String, String> getCoordinate(String address) {
+        Map<String, String> coordinate = new LinkedHashMap<>();
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
@@ -73,12 +73,17 @@ public class JpaCompanyService implements CompanyService {
         Object object = restTemplate.exchange(url, HttpMethod.GET, request, Object.class, params).getBody();
         ObjectMapper objectMapper = new ObjectMapper();
         Map map = objectMapper.convertValue(object, Map.class);
-        List<Map<String, String>> elements = (List<Map<String, String>>) map.get("documents");
-        Map<String, String> coordinateMap = elements.get(0);
-        Double lng = Double.valueOf(coordinateMap.get("x"));
-        Double lat = Double.valueOf(coordinateMap.get("y"));
-        coordinate.put("lng", lng);
-        coordinate.put("lat", lat);
+        List<Map<String, Object>> elements = (List<Map<String, Object>>) map.get("documents");
+        Map<String, Object> coordinateMap = elements.get(0);
+        Map<String, String> road_address = (Map<String, String>) coordinateMap.get("road_address");
+        String roadAddress = road_address.get("address_name");
+        String postalCode = road_address.get("zone_no");
+        String longitude = road_address.get("x");
+        String latitude = road_address.get("y");
+        coordinate.put("roadAddress", roadAddress);
+        coordinate.put("postalCode", postalCode);
+        coordinate.put("longitude", longitude);
+        coordinate.put("latitude", latitude);
         return coordinate;
     }
 
