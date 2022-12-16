@@ -6,6 +6,8 @@ import com.golfzonaca.adminpage.service.company.CompanyService;
 import com.golfzonaca.adminpage.service.company.dto.CompanyDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,7 @@ import java.util.List;
 public class CompanyController {
 
     private final CompanyService companyService;
+    private final PasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping //업체 등록 조회
     public String companies(@ModelAttribute("companySearch") CompanySearchCond companySearch, Model model) {
@@ -43,6 +46,8 @@ public class CompanyController {
 
     @PostMapping("/add")
     public String addCompany(@ModelAttribute CompanyDto companyDto, RedirectAttributes redirectAttributes) {
+        String pw = bCryptPasswordEncoder.encode(companyDto.getCompanyPw());
+        companyDto.setCompanyPw(pw);
         Company savedCompany = companyService.save(companyDto);
         redirectAttributes.addAttribute("companyId", savedCompany.getId());
         redirectAttributes.addAttribute("status", true);
