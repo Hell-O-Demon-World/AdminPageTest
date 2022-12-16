@@ -21,6 +21,9 @@ public class SecurityConfig {
         http.csrf().disable()
                 .formLogin()
                 .and()
+                .authorizeRequests()
+                .antMatchers("/**").hasRole("ADMIN")
+                .and()
                 .logout(logout -> logout
                         .logoutUrl("/signout")
                         .invalidateHttpSession(true)

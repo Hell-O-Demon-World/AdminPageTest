@@ -46,6 +46,7 @@ public class CompanyController {
 
     @PostMapping("/add")
     public String addCompany(@ModelAttribute CompanyDto companyDto, RedirectAttributes redirectAttributes) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String pw = bCryptPasswordEncoder.encode(companyDto.getCompanyPw());
         companyDto.setCompanyPw(pw);
         Company savedCompany = companyService.save(companyDto);
