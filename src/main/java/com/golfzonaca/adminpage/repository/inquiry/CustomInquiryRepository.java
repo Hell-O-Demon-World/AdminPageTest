@@ -1,12 +1,12 @@
 package com.golfzonaca.adminpage.repository.inquiry;
 
 import com.golfzonaca.adminpage.domain.Inquiry;
+import com.golfzonaca.adminpage.exception.NonExistedInquiryException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Repository
 @Transactional
@@ -21,6 +21,6 @@ public class CustomInquiryRepository implements InquiryRepository {
 
     @Override
     public Inquiry findById(Long inquiryId) {
-        return jpaRepository.findById(inquiryId).orElseThrow(() -> new NoSuchElementException("존재하지 않는 문의입니다."));
+        return jpaRepository.findById(inquiryId).orElseThrow(() -> new NonExistedInquiryException("존재하지 않는 문의입니다."));
     }
 }
