@@ -18,7 +18,6 @@ import java.util.List;
 @Getter
 @Entity
 @NoArgsConstructor
-@Builder
 @AllArgsConstructor
 public class Reservation {
 
@@ -73,12 +72,6 @@ public class Reservation {
         this.resEndTime = resEndTime;
         this.status = status;
         this.fixStatus = fixStatus;
-    }
-
-    public Reservation toEntity() {
-        return Reservation.builder()
-                .user(new User())
-                .build();
     }
 
     public void upDateTime(LocalTime resStartTime, LocalTime resEndTime) {

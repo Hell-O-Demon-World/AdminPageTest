@@ -28,6 +28,15 @@ public class InquiryController {
     @GetMapping("/qna")
     public String inquiries(Model model) {
         Map<Integer, InquiryData> inquiryData = inquiryService.findAll();
+        for (int i = 0; i < inquiryData.size(); i++) {
+            InquiryData targetInquiryData = inquiryData.get(i);
+            String inquiryContext = inquiryData.get(i).getInquiryContext();
+            if (inquiryContext.length() > 20) {
+                String simpleInquiryContext = inquiryContext.substring(0, 20)+"...";
+                targetInquiryData.setInquiryContext(simpleInquiryContext);
+                inquiryData.replace(i, targetInquiryData);
+            }
+        }
         model.addAttribute("inquiries", inquiryData);
         return "qna/inquiries";
     }
