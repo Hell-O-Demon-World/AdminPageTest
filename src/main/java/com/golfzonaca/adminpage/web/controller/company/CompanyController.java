@@ -17,7 +17,7 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping("companies")
+@RequestMapping("/companies")
 @RequiredArgsConstructor
 public class CompanyController {
 
