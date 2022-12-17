@@ -17,7 +17,7 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping("/companies")
+@RequestMapping("companies")
 @RequiredArgsConstructor
 public class CompanyController {
 
@@ -28,20 +28,20 @@ public class CompanyController {
     public String companies(@ModelAttribute("companySearch") CompanySearchCond companySearch, Model model) {
         List<Company> companies = companyService.findCompanies(companySearch.getCompanyName());
         model.addAttribute("companies", companies);
-        return "/company/companies";
+        return "company/companies";
     }
 
     @GetMapping("/{companyId}")
     public String company(@PathVariable Long companyId, Model model) {
         Company company = companyService.findById(companyId);
         model.addAttribute("company", company);
-        return "/company/company";
+        return "company/company";
     }
 
     @GetMapping("/add")
     public String addCompanyForm(Model model) {
         model.addAttribute("company", new CompanyDto());
-        return "/company/addForm";
+        return "company/addForm";
     }
 
     @PostMapping("/add")
@@ -51,12 +51,12 @@ public class CompanyController {
         Company savedCompany = companyService.save(companyDto);
         redirectAttributes.addAttribute("companyId", savedCompany.getId());
         redirectAttributes.addAttribute("status", true);
-        return "redirect:/companies/{companyId}";
+        return "redirect:companies/{companyId}";
     }
 
     @GetMapping("/delete/{companyId}")
     public String delete(@PathVariable Long companyId) {
         companyService.delete(companyId);
-        return "redirect:/companies";
+        return "redirect:companies";
     }
 }

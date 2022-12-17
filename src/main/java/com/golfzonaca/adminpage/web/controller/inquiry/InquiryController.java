@@ -25,7 +25,7 @@ public class InquiryController {
     private final InquiryService inquiryService;
     private final AnswerService answerService;
 
-    @GetMapping("/qna")
+    @GetMapping("qna")
     public String inquiries(Model model) {
         Map<Integer, InquiryData> inquiryData = inquiryService.findAll();
         for (int i = 0; i < inquiryData.size(); i++) {
@@ -38,7 +38,7 @@ public class InquiryController {
             }
         }
         model.addAttribute("inquiries", inquiryData);
-        return "/qna/inquiries";
+        return "qna/inquiries";
     }
 
     @GetMapping("/qna/{inquiryId}")
@@ -46,13 +46,13 @@ public class InquiryController {
         InquiryDetails inquiryDetails = inquiryService.findDetails(inquiryId);
         model.addAttribute("inquiryDetails", inquiryDetails);
         model.addAttribute("answer", new Answer());
-        return "/qna/inquiry";
+        return "qna/inquiry";
     }
 
     @PostMapping("/qna/{inquiryId}/answer")
     public String answer(@ModelAttribute AnswerData answerData, @PathVariable Long inquiryId, RedirectAttributes redirectAttributes) {
         Answer answer = answerService.save(inquiryId, answerData.getAnswer());
         redirectAttributes.addAttribute("inquiryId", inquiryId);
-        return "redirect:/qna/{inquiryId}";
+        return "redirect:qna/{inquiryId}";
     }
 }
