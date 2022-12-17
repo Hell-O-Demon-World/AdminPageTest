@@ -17,7 +17,7 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping("companies")
+@RequestMapping("/companies")
 @RequiredArgsConstructor
 public class CompanyController {
 
@@ -51,12 +51,12 @@ public class CompanyController {
         Company savedCompany = companyService.save(companyDto);
         redirectAttributes.addAttribute("companyId", savedCompany.getId());
         redirectAttributes.addAttribute("status", true);
-        return "redirect:companies/{companyId}";
+        return "redirect:/companies/{companyId}";
     }
 
     @GetMapping("/delete/{companyId}")
     public String delete(@PathVariable Long companyId) {
         companyService.delete(companyId);
-        return "redirect:companies";
+        return "redirect:/companies";
     }
 }
