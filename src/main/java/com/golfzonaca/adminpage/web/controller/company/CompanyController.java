@@ -17,7 +17,7 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping("/companies")
+@RequestMapping("companies")
 @RequiredArgsConstructor
 public class CompanyController {
 
@@ -28,7 +28,7 @@ public class CompanyController {
     public String companies(@ModelAttribute("companySearch") CompanySearchCond companySearch, Model model) {
         List<Company> companies = companyService.findCompanies(companySearch.getCompanyName());
         model.addAttribute("companies", companies);
-        return "company/companies";
+        return "/company/companies";
     }
 
     @GetMapping("/{companyId}")
@@ -46,7 +46,6 @@ public class CompanyController {
 
     @PostMapping("/add")
     public String addCompany(@ModelAttribute CompanyDto companyDto, RedirectAttributes redirectAttributes) {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String pw = bCryptPasswordEncoder.encode(companyDto.getCompanyPw());
         companyDto.setCompanyPw(pw);
         Company savedCompany = companyService.save(companyDto);

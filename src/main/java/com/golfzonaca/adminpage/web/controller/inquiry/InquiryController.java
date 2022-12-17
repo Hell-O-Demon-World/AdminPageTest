@@ -38,7 +38,7 @@ public class InquiryController {
             }
         }
         model.addAttribute("inquiries", inquiryData);
-        return "qna/inquiries";
+        return "/qna/inquiries";
     }
 
     @GetMapping("/qna/{inquiryId}")
@@ -46,7 +46,7 @@ public class InquiryController {
         InquiryDetails inquiryDetails = inquiryService.findDetails(inquiryId);
         model.addAttribute("inquiryDetails", inquiryDetails);
         model.addAttribute("answer", new Answer());
-        return "qna/inquiry";
+        return "/qna/inquiry";
     }
 
     @PostMapping("/qna/{inquiryId}/answer")
