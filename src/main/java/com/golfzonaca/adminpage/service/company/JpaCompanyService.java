@@ -18,10 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Transactional
@@ -38,6 +35,9 @@ public class JpaCompanyService implements CompanyService {
     public Company save(CompanyDto companyDto) {
 
         Map<String, String> coordinate = getCoordinate(companyDto.getAddress());
+        if (Optional.ofNullable(coordinate.get("postalCode")).isEmpty()) {
+            coordinate.put("postalCode", companyDto.getPostalCode());
+        }
 
         Address address = addressRepository.save(new Address(coordinate.get("roadAddress"), coordinate.get("postalCode"), Double.valueOf(coordinate.get("longitude")), Double.valueOf(coordinate.get("latitude"))));
 
@@ -79,11 +79,18 @@ public class JpaCompanyService implements CompanyService {
             throw new WrongAddressException("존재하지 않는 주소입니다.");
         }
         Map<String, Object> coordinateMap = elements.get(0);
-        Map<String, String> road_address = (Map<String, String>) coordinateMap.get("road_address");
-        String roadAddress = road_address.get("address_name");
-        String postalCode = road_address.get("zone_no");
-        String longitude = road_address.get("x");
-        String latitude = road_address.get("y");
+        Optional<Map<String, String>> optionalAddressMap = Optional.ofNullable((Map<String, String>) coordinateMap.get("roadAddressMap"));
+        if (optionalAddressMap.isEmpty()) {
+            coordinate.put("roadAddress", address);
+            coordinate.put("longitude", (String) coordinateMap.get("x"));
+            coordinate.put("latitude", (String) coordinateMap.get("y"));
+            return coordinate;
+        }
+        Map<String, String> roadAddressMap = optionalAddressMap.get();
+        String roadAddress = roadAddressMap.get("address_name");
+        String postalCode = roadAddressMap.get("zone_no");
+        String longitude = roadAddressMap.get("x");
+        String latitude = roadAddressMap.get("y");
         coordinate.put("roadAddress", roadAddress);
         coordinate.put("postalCode", postalCode);
         coordinate.put("longitude", longitude);
