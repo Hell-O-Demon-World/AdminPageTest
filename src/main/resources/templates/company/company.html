@@ -58,17 +58,16 @@
     </div>
 
     <div>
-        <label for="location">주소</label>
-        <input type="text" id="location" name=location class="form-control" value="울산광역시 중구"
-               th:value="${company.address.address}" readonly disabled="true">
-    </div>
-
-    <div>
         <label for="postalCode">우편번호</label>
         <input type="text" id="postalCode" name=postalCode class="form-control" value="000000"
                th:value="${company.address.postalCode}" readonly disabled="true">
     </div>
 
+    <div>
+        <label for="location">주소</label>
+        <input type="text" id="location" name=location class="form-control" value="울산광역시 중구"
+               th:value="${company.address.address}" readonly disabled="true">
+    </div>
 
     <!-- multi checkbox -->
     <hr class="my-4">
