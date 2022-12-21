@@ -8,6 +8,7 @@ import com.golfzonaca.adminpage.repository.address.AddressRepository;
 import com.golfzonaca.adminpage.repository.company.CompanyRepository;
 import com.golfzonaca.adminpage.service.company.dto.CompanyDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.*;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
