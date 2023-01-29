@@ -24,9 +24,9 @@ public class QueryCompanyRepository {
 
     List<Company> findCompanies(String keyWord) {
         return queryFactory
-                .selectFrom(company) // 같을 때만 사용 (select할걸 같을 때 )
+                .selectFrom(company)
                 .where(containKeyWord(keyWord))
-                .fetch(); //실행하는 메소드
+                .fetch();
     }
 
     private BooleanExpression containKeyWord(String keyWord) {

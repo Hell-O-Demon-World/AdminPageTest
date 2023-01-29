@@ -12,6 +12,7 @@ import java.util.List;
 
 @Getter
 @Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Mileage {
@@ -20,9 +21,10 @@ public class Mileage {
     private Long id;
     @Column(name = "POINT", nullable = false, length = 11)
     private long point;
+
     @Column(name = "LATEST_UPDATE_DATE", nullable = false)
     private LocalDateTime latestUpdateDate;
-    //양방향 매핑
+
     @OneToMany(mappedBy = "mileage")
     private List<MileageUpdate> mileageUpdateList = new LinkedList<>();
 

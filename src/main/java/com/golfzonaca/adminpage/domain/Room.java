@@ -28,7 +28,6 @@ public class Room {
     @JoinColumn(name = "PLACE_ID")
     private Place place;
 
-    //양방향 매핑
     @OneToMany(mappedBy = "room")
     private List<Reservation> reservationList = new LinkedList<>();
 

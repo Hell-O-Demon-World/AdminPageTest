@@ -1,27 +1,15 @@
-### Test Server ###
+### Deploy Server ###
 spring:
   datasource:
-    url: ENC(dQjJu4U/N0dcAKs3pCSPsur501AYrQW6WUUK4BmE4h93Jq2nAmS6+0FzMXY+Q81r0/0KB6haBsE+4MvL11m15ZiTv3qanjBz)
-    username: ENC(n6/URBJ1PgxyVVY/ZyhKQmJSboaqV//l)
-    password: ENC(D/OTuHuj3tyVg5Y467BlBpDDRbA/Od2h)
-### Spring Security ###
-#  security:
-#    user:
-#      name: admin
-#      password: admin1234
-#      roles: ADMIN
+    url: ENC(8RGjgKwqoWxPXWWtozKImfcNo5GMUnCIMYvONc61FsNmKNqlVEmHnXVsHIEQBl9Ld7a/RJUCrSHzp7QxRKD0ldDBJju/8s6c)
+    username: ENC(IYZiiPFZ/d7XM0OxII/y5ZjgTPU7eKRJ)
+    password: ENC(tCx5PtshhUwYLTDIrXuItttIEB671nLL)
+  ### Spring Security ###
   security:
     user:
       name: ENC(63WZpy9CngN/4ZPp134a4A==)
       password: ENC(Puc4Y8EdmHM1JCno/VQDrizi3Eq19/noW2lHNrEMtr5hjAtpQ5JkhNwnio5WboBa6kHTQOAq/sacPRQM39pIGQdNWKnQz1Ta)
       roles: ENC(yio+s1lOf2YcthENx1s+dg==)
-### Deploy Server ###
-#spring:
-#  datasource:
-#    url: ENC(Kd8gucSZa2fANZAs40Z1Sok15LknDR5dmhI5YiUh50LKtwdopg4S/tnEDLLjgMdVJZZY6Rxsxa8ih+0N7g8rzA==)
-#    username: ENC(YoNtqenM0QDQBWR47bpzJA+tDj6zkdUH)
-#    password: ENC(xIBqFuUo5p8FZUZO0hOB5Hcvh3CDziNe)
-
 ### KakaoMap Api Key ###
 kakao:
   map:

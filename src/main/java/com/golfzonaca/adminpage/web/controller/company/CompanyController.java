@@ -6,7 +6,6 @@ import com.golfzonaca.adminpage.service.company.CompanyService;
 import com.golfzonaca.adminpage.service.company.dto.CompanyDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +23,7 @@ public class CompanyController {
     private final CompanyService companyService;
     private final PasswordEncoder bCryptPasswordEncoder;
 
-    @GetMapping //업체 등록 조회
+    @GetMapping
     public String companies(@ModelAttribute("companySearch") CompanySearchCond companySearch, Model model) {
         List<Company> companies = companyService.findCompanies(companySearch.getCompanyName());
         model.addAttribute("companies", companies);

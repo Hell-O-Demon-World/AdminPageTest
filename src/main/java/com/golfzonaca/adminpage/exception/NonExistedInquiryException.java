@@ -7,8 +7,6 @@ import java.util.NoSuchElementException;
 
 @ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "error.inquiry")
 public class NonExistedInquiryException extends NoSuchElementException {
-    public NonExistedInquiryException() {
-    }
 
     public NonExistedInquiryException(String msg) {
         super(msg);
